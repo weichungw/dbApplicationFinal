@@ -1,0 +1,8 @@
+/venv/*
+/db_repository/*
+/__pycache__/*
+/tmp/*
+
+/final-33b0a-firebase-adminsdk-vjuqw-d474b38d4b.json
+/config.py
+/config.pyc
