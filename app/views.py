@@ -29,24 +29,6 @@ def index():
             posts=posts) 
 
 
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
-    sform = SignUpForm()
-    if sform.validate_on_submit():
-        app.logger.debug('signup the mother fucker')
-        username = sform.username.data
-        password = sform.password.data
-        email = sform.email.data
-        put_data ={ 
-                    'password':password,
-                    'email':email 
-                    }
-        auth.create_user_with_email_and_password(email, password)
-        db.child('Users').child(username).set(put_data)
-        return redirect('signin')
-
-    return render_template('signup.html',
-            form=sform)
         
 @app.route('/signin',methods=['GET','POST'])
 def signin():
@@ -55,7 +37,7 @@ def signin():
     error =""
     app.logger.debug('enter signin func')
     if sform.validate_on_submit():
-        app.logger.debug('signup the mother fucker')
+        app.logger.debug('Enter signup function')
         username = sform.username.data
         password = sform.password.data
         repeatpassword = sform.repeatpassword.data
@@ -114,6 +96,24 @@ def logout():
 #    return user
 
         
+#@app.route('/signup', methods=['GET', 'POST'])
+#def signup():
+#    sform = SignUpForm()
+#    if sform.validate_on_submit():
+#        app.logger.debug('signup the mother fucker')
+#        username = sform.username.data
+#        password = sform.password.data
+#        email = sform.email.data
+#        put_data ={ 
+#                    'password':password,
+#                    'email':email 
+#                    }
+#        auth.create_user_with_email_and_password(email, password)
+#        db.child('Users').child(username).set(put_data)
+#        return redirect('signin')
+#
+#    return render_template('signup.html',
+#            form=sform)
 
 #@app.route('/login',methods=['GET','POST'])
 #def login():
