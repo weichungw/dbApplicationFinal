@@ -43,15 +43,33 @@ def signup():
                     }
         auth.create_user_with_email_and_password(email, password)
         db.child('Users').child(username).set(put_data)
-        return redirect('login')
+        return redirect('signin')
 
     return render_template('signup.html',
             form=sform)
         
-@app.route('/login',methods=['GET','POST'])
-def login():
+@app.route('/signin',methods=['GET','POST'])
+def signin():
     lform = LoginForm()
+    sform = SignUpForm()
     error =""
+    app.logger.debug('enter signin func')
+    if sform.validate_on_submit():
+        app.logger.debug('signup the mother fucker')
+        username = sform.username.data
+        password = sform.password.data
+        repeatpassword = sform.repeatpassword.data
+        email = sform.email.data
+        if password == repeatpassword:
+            put_data ={ 
+                        'password':password,
+                        'email':email 
+                        }
+            auth.create_user_with_email_and_password(email, password)
+            db.child('Users').child(username).set(put_data)
+            app.logger.debug('Sign up {} success... '.format(username))
+            return redirect('signin')
+
     if lform.validate_on_submit():
         print('fuck ya')
         try:
@@ -60,15 +78,18 @@ def login():
             user = auth.sign_in_with_email_and_password(email, password)
         except:
             error = 'User not found, please double check your email'
-            return render_template('login.html',
-                    form=lform,
+            return render_template('signin.html',
+                    lform=lform,
+                    sform=sform,
                     error=error) 
 
         app.logger.debug(user)
         return redirect('secret')
 
-    return render_template('login.html',
-            form=lform,
+
+    return render_template('signin.html',
+            lform=lform,
+            sform=sform,
             error=error)
 
 @app.route('/secret',methods=['GET'])
