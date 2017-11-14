@@ -1,7 +1,6 @@
 import os
 
 from flask import Flask
-#from flask_sqlalchemy import SQLAlchemy
 
 from flask_login import LoginManager
 from config import basedir, FIREBASE_CONFIG
@@ -16,8 +15,8 @@ app = Flask(__name__)
 app.config.from_object('config')
 #db = SQLAlchemy(app)
 
-#lm = LoginManager()
-#lm.init_app(app)
+lm = LoginManager()
+lm.init_app(app)
 
 #firebase = firebase.FirebaseApplication('https://final-33b0a.firebaseio.com/',None)
 cred = credentials.Certificate('final-33b0a-firebase-adminsdk-vjuqw-d474b38d4b.json')

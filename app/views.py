@@ -1,12 +1,16 @@
 from flask import render_template, flash, redirect
 from flask import session, url_for, request ,g
 from flask_login import login_user, logout_user, current_user, login_required
+
 from app import app, fbapp, auth, db
-#from app import firebase, lm
+from app import lm
+
+from .user import User
 
 from .forms import LoginForm, SignUpForm 
-#from .models import User
 
+
+users =[User(id) for id in range(1,21)]
 
 @app.route('/')
 @app.route('/index')
@@ -28,7 +32,13 @@ def index():
             user=user,
             posts=posts) 
 
+@app.route('/home', methods=['GET'])
+def main():
+    return render_template('home.html')
 
+@app.route('/feed', methods=['GET'])
+def feed():
+    return render_template('feed.html')
         
 @app.route('/signin',methods=['GET','POST'])
 def signin():
@@ -38,10 +48,10 @@ def signin():
     app.logger.debug('enter signin func')
     if sform.validate_on_submit():
         app.logger.debug('Enter signup function')
+        email = sform.email.data
         username = sform.username.data
         password = sform.password.data
         repeatpassword = sform.repeatpassword.data
-        email = sform.email.data
         if password == repeatpassword:
             put_data ={ 
                         'password':password,
@@ -53,11 +63,13 @@ def signin():
             return redirect('signin')
 
     if lform.validate_on_submit():
-        print('fuck ya')
+        print('valid login form')
         try:
             email = lform.email.data
             password = lform.password.data
-            user = auth.sign_in_with_email_and_password(email, password)
+            #user = auth.sign_in_with_email_and_password(email, password)
+            print(user)
+            print(type(user))
         except:
             error = 'User not found, please double check your email'
             return render_template('signin.html',
@@ -75,18 +87,22 @@ def signin():
             error=error)
 
 @app.route('/secret',methods=['GET'])
+@login_required
 def secret():
     return render_template('secret.html')
 
 @app.route('/logout', methods=['GET'])
+@login_required
 def logout():
+    logout_user()
     return redirect('index')
 
 
-#@lm.user_loader
-#def load_user(id):
-#    app.logger.debug('enter user_loader')
-#    return User.query.get(int(id))
+@lm.user_loader
+def load_user(id):
+    app.logger.debug('enter user_loader')
+      
+    return 
 
 #@lm.request_loader
 #def request_loader(request):

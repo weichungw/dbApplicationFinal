@@ -10,30 +10,6 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css') }}">
 
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
-<script type="text/javascript">
-   function login(){
-       var username = document.getElementById('user').value;
-       var password = document.getElementById('pass').value;
-       // 用户名和密码都不为空
-       if(username&&password){
-           //localStorage.username = username;
-           //var url = location.search.split("=")[1];
-           location.href = "newhome.html"; //获取返回地址，跳转
-       }
-
-   }
-</script>
-<script>
-$.validator.setDefaults({
-    submitHandler: function() {
-      alert("submit!");
-    }
-});
-$().ready(function() {
-    $("#reg").validate();
-});
-</script>
-
 </head>
 <body>
 <div class="jq22-container" style="margin-bottom:5px">
