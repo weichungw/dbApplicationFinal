@@ -1,6 +1,65 @@
 <!doctype html>
 <html>
-    <head>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>homepage</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='new.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='amazeui.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .btn .blog-tag .blog-clear-padding{
+        background-color: #ae9773;
+        }
+        .am-u-md-3 {
+            float:right;
+        }
+
+    </style>
+
+</head>
+<body>
+<!-- nav start -->
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">iCat</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li><a href="">Home</a></li>
+                <li><a href="main.html">Main</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Account <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="Signin.html">logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">submit</button>
+            </form>
+
+        </div>
+    </div>
+</nav>
+
+{% block main %}
+{% endblock %}
+
+</body>
+    <!--head>
         {% if user %}
         <title>Hello {{ user.username }} !</title>
         {% else %}
@@ -20,5 +79,5 @@
             {% endif %}
         {% endwith %}
         {% block content %}{% endblock %}
-    </body>
+    </body-->
 </html>
