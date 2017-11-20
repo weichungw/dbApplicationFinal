@@ -1,0 +1,47 @@
+{% macro post(pic_source="pics/cutcat1.jpg" , av_source="pics/av1.jpg",
+ time="2017/11/11", text='My cat eat my homework!') %}
+<div class="row-float">
+    <div class="postrow">
+        <div class="col-sm-8">
+            <a href="#">
+                <!-- TODO picture source-->
+                <img src="{{ url_for('static',filename=pic_source) }}" class="img-responsive img-box img-thumbnail", align"left">
+            </a>
+        </div>
+        <div class="col-xs-8 col-sm-9 col-md-6">
+            <div class="list-group">
+                <div class="list-group-item">
+                    <div class="row-picture">
+                        <a href="#" title="user1">
+                            <!-- TODO avtar source-->
+                            <img class="circle img-thumbnail img-box" src="{{ url_for('static', filename=av_source)}}" alt="sintret">
+                        </a>
+                    </div>
+                    <div class="row-content">
+                        <div class="list-group-item-heading">
+                            <a href="#" title="sintret">
+                                <!--TODO user name-->
+                                <small>sintret</small>
+                            </a>
+                        </div>
+                        <p>
+                            <small>
+                                <!--TODO post information-->
+                                <i class="glyphicon glyphicon-time">{{ time }} via </i> 
+                                <span class="twitter"> 
+                                    <i class="fa fa-twitter"></i> 
+                                    <a target="_blank" href="https://twitter.com/sintret" alt="sintret" title="sintret">@sintret</a>
+                                </span>
+                            </small>
+                        </p>
+                        <p>
+                        <!--TODO post context-->
+                        <h4><a href="#">"{{ text }}"</a></h4>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro%}

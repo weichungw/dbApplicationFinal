@@ -17,6 +17,7 @@ app.config.from_object('config')
 
 lm = LoginManager()
 lm.init_app(app)
+lm.login_view="account"
 
 #firebase = firebase.FirebaseApplication('https://final-33b0a.firebaseio.com/',None)
 cred = credentials.Certificate('final-33b0a-firebase-adminsdk-vjuqw-d474b38d4b.json')

@@ -34,15 +34,15 @@
 					</div>
 					<div class="hr"></div>
 				</form>
-                <form class="sign-up-htm" action="{{ url_for('signin') }}" method="POST" name="sform">
+                <form class="sign-up-htm" action="{{ url_for('signup') }}" method="POST" name="sform">
                     {{ sform.hidden_tag() }}
-					<div class="group">
-						<label for="username" class="label">Username</label>
-                        {{ sform.username(class_="input") }}
-					</div>
                     <div class="group">
 						<label for="email" class="label">Email</label>
                         {{ sform.email(class_="input") }}
+					</div>
+                    <div class="group">
+						<label for="username" class="label">Username</label>
+                        {{ sform.username(class_="input") }}
 					</div>
 					<div class="group">
 						<label for="password" class="label">Password</label>

@@ -10,8 +10,6 @@ from .user import User
 from .forms import LoginForm, SignUpForm 
 
 
-users =[User(id) for id in range(1,21)]
-
 @app.route('/')
 @app.route('/index')
 def index():
@@ -34,57 +32,67 @@ def index():
 
 @app.route('/home', methods=['GET'])
 def main():
+    app.logger.debug('')
     return render_template('home.html')
 
 @app.route('/feed', methods=['GET'])
 def feed():
     return render_template('feed.html')
         
-@app.route('/signin',methods=['GET','POST'])
-def signin():
+@app.route('/account', methods=['GET','POST'])
+def account():
     lform = LoginForm()
     sform = SignUpForm()
     error =""
-    app.logger.debug('enter signin func')
-    if sform.validate_on_submit():
-        app.logger.debug('Enter signup function')
-        email = sform.email.data
-        username = sform.username.data
-        password = sform.password.data
-        repeatpassword = sform.repeatpassword.data
-        if password == repeatpassword:
-            put_data ={ 
-                        'password':password,
-                        'email':email 
-                        }
-            auth.create_user_with_email_and_password(email, password)
-            db.child('Users').child(username).set(put_data)
-            app.logger.debug('Sign up {} success... '.format(username))
-            return redirect('signin')
+    app.logger.debug('enter account page')
 
+    return render_template('account.html',
+            lform=lform,
+            sform=sform,
+            error=error)
+
+@app.route('/signin',methods=['GET','POST'])
+def signin():
+    app.logger.debug('Enter login function')
+    lform = LoginForm()
     if lform.validate_on_submit():
         print('valid login form')
         try:
             email = lform.email.data
             password = lform.password.data
-            #user = auth.sign_in_with_email_and_password(email, password)
-            print(user)
-            print(type(user))
-        except:
-            error = 'User not found, please double check your email'
-            return render_template('signin.html',
-                    lform=lform,
-                    sform=sform,
-                    error=error) 
+            fuser = auth.sign_in_with_email_and_password(email, password)
+            user= User(fuser)
+        except :
+            app.logger.error = 'User not found, please double check your email'
+            return redirect('account')
+        login_user(user)
+        return redirect('home')
 
-        app.logger.debug(user)
-        return redirect('secret')
+    return redirect('account') 
 
+@app.route('/signup', methods=['GET','POST'])
+def signup():
+    app.logger.debug('Enter signup function')
+    sform = SignUpForm()
+    if sform.validate_on_submit():
+        print('valid signup form')
+        username = sform.username.data
+        email = sform.email.data
+        password = sform.password.data
+        repeatpassword = sform.repeatpassword.data
+        if password == repeatpassword:
+            fuser=auth.create_user_with_email_and_password(email, password)
+            put_data ={ 
+                        'password':password,
+                        'email':email,
+                        'username':username,
+                        'id':fuser['idToken']
+                        }
 
-    return render_template('signin.html',
-            lform=lform,
-            sform=sform,
-            error=error)
+            db.child('Users').child(username).set(put_data)
+            app.logger.debug('Sign up {} success... '.format(username))
+            return redirect('account')
+    return redirect('account')
 
 @app.route('/secret',methods=['GET'])
 @login_required
@@ -100,9 +108,14 @@ def logout():
 
 @lm.user_loader
 def load_user(id):
-    app.logger.debug('enter user_loader')
-      
-    return 
+    app.logger.debug('enter user_loader id:{}'.format(id))
+    user =None
+    try: 
+        fuser=auth.get_account_info(id)
+        user=User(fuser)
+    except :
+        print('google authentication fail')
+    return user 
 
 #@lm.request_loader
 #def request_loader(request):
@@ -112,51 +125,3 @@ def load_user(id):
 #    return user
 
         
-#@app.route('/signup', methods=['GET', 'POST'])
-#def signup():
-#    sform = SignUpForm()
-#    if sform.validate_on_submit():
-#        app.logger.debug('signup the mother fucker')
-#        username = sform.username.data
-#        password = sform.password.data
-#        email = sform.email.data
-#        put_data ={ 
-#                    'password':password,
-#                    'email':email 
-#                    }
-#        auth.create_user_with_email_and_password(email, password)
-#        db.child('Users').child(username).set(put_data)
-#        return redirect('signin')
-#
-#    return render_template('signup.html',
-#            form=sform)
-
-#@app.route('/login',methods=['GET','POST'])
-#def login():
-#    #if g.user is not None and g.user.is_authenticated:
-#    #    return redirect(url_for('index'))
-#    form=LoginForm()
-#    error=None
-#    if form.validate_on_submit():
-#        users=User.query.all()
-#        app.logger.debug(str(form.username))
-#        app.logger.debug(type(form.username))
-#        user = User.query.filter_by(username=form.username.data).first()
-#        if user:
-#            if login_user(user):
-#                user.is_authenticated =True
-#                app.logger.debug('Logged in user %s', user.username)
-#                flash('Logged insuccessfully.')
-#                return redirect(url_for('secret'))
-#        error = 'Invalid username or password.'
-#        session['remember_me'] = form.remember_me.data
-#        #flash('Login requested for OpenID="%s", remember_me%s' %
-#        #        (form.openid.data, str(form.remember_me.data)))
-#        #return redirect('/index')
-#
-#    return render_template('login.html',
-#            title='Sign In',
-#            form=form,
-#            error=error,
-#            providers=app.config['OPENID_PROVIDERS']
-#            )

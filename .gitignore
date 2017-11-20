@@ -4,6 +4,7 @@
 /tmp/*
 /app/__pycache__/*
 /app/__init__.pyc
+/app/static/pics/*
 
 /final-33b0a-firebase-adminsdk-vjuqw-d474b38d4b.json
 /config.py

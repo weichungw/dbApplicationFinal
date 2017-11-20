@@ -1,9 +1,11 @@
 from flask_login import UserMixin
 class User(UserMixin):
-    def __init__(self,id , username='anthony', password='secret',  active=True):
-        self.id =str(id)
-        self.name =username+str(id)
-        self.password = password 
+    def __init__(self,fuser,active=True):
+        self.fuser = fuser
+        self.username= None
+        self.email= None
+        self.password =None 
+        self.refreshToken=None
         self.active =active
     
 
@@ -16,10 +18,10 @@ class User(UserMixin):
         #TODO add flase condition
         return True 
     def get_id(self):
-        return self.id
+        return self.fuser['idToken']
     def get_auth_token(self):
         pass
     def __repr__(self):
-        return "{} {} {}".format(self.id,self.name,self.password)
+        return "id:{}".format(self.fuser['idToken'])
 
 
