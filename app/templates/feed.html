@@ -1,134 +1,50 @@
-<head>
-	<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>mainpage</title>
-	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/amazeui.min.css">
-  <link rel="stylesheet" href="assets/css/app.css">
-  <link rel="stylesheet" href="assets/css/main.css">
-	<link rel="stylesheet" href="assets/css/feed.css">
-	<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="assets/js/main.js"></script>
-</head>
-<body>
-<!-- nav start -->
-<nav class="navbar navbar-default" role="navigation">
-	<div class="container-fluid">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">iCat</a>
-    </div>
-    <div>
-        <ul class="nav navbar-nav">
-            <li><a href="Home.html">Home</a></li>
-						<li><a href="#">Main</a></li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    Account <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="Signin.html">logout</a></li>
-                </ul>
-            </li>
-        </ul>
-        <form class="navbar-form navbar-right" role="search">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
-            </div>
-            <button type="submit" class="btn btn-default ">submit</button>
-        </form>
-    </div>
-	</div>
-</nav>
-<!-- nav end -->
-<!-- status post start -->
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='feed.css') }}">
+<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+<script src="{{url_for('static',filename='main.js')}}"></script>
+<title>mainpage</title>
+{% endblock %}
+
+{% block main %}
 <div class="container">
-   <div class="row">
-   <div class="col-md-10">
-               <div class="widget-area no-padding blank">
-               <div class="status-upload">
-                 <form>
-                   <textarea placeholder="What are you doing right now?" ></textarea>
-                   <ul>
-                     <li><a title="" data-toggle="tooltip" data-placement="top" data-original-title="Video">Video</a></li>
-                     <li><a title="" data-toggle="tooltip" data-placement="top" data-original-title="Video">Img</a></li>
-                   </ul>
-                   <button type="submit" class="btn btn-default"> Share</button>
-                 </form>
-               </div><!-- Status Upload  -->
-             </div><!-- Widget Area -->
-           </div>
-
-   </div>
-</div>
-<br>
-<!-- status post end -->
-<!-- post start -->
-<div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="[ panel panel-default ] panel-google-plus">
-                <div class="panel-heading">
-                    <img class="img-circle pull-left" src="https://lh3.googleusercontent.com/-CxXg7_7ylq4/AAAAAAAAAAI/AAAAAAAAAQ8/LhCIKQC5Aq4/s46-c-k-no/photo.jpg" alt="Mouse0270" />
-                    <h3>Robert McIntosh</h3>
-                    <h5><span>Shared publicly</span> - <span>Jun 27, 2014</span> </h5>
-                </div>
-                <div class="panel-body">
-                    <p>  Funny baby cat drinking milk again</p>
-										<img class="am-u-sm-8 pull-left" src="https://2static.fjcdn.com/pictures/Funny+baby+cat+drinking+milk+again_c445cc_6026280.jpg" alt="" />
-                </div>
-
-                <div class="panel-footer">
-										<a href="#" class="btn btn-default stat-item">
-												<i class="fa fa-thumbs-up icon"></i>2
-										</a>
-
-                    <div class="input-placeholder">Add a comment...</div>
-                </div>
-                <div class="panel-google-plus-comment">
-                    <img class="img-circle" src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s46" alt="User Image" />
-                    <div class="panel-google-plus-textarea">
-                        <textarea rows="4"></textarea>
-                        <button type="submit" class="[ btn btn-default disabled ]">Post comment</button>
-                        <button type="reset" class="[ btn btn-default ]">Cancel</button>
-
-													<ul class="comments-list">
-				                    <li class="comment">
-				                        <a class="pull-left" href="#">
-				                            <img class="img-circle" src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s46" alt="User Image" width="50" height="50";>
-				                        </a>
-				                        <div class="comment-body">
-				                            <div class="comment-heading">
-				                                <h6 class="user">Gavino Free</h6>
-
-				                            </div>
-				                            <p>Sure, oooooooooohhhhhhhhhhhh</p>
-				                        </div>
-				                        <ul class="comments-list">
-
-				                            <li class="comment">
-				                                <a class="pull-left" href="#">
-				                                    <img class="img-circle" src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s46" alt="avatar" width="50" height="50";>
-				                                </a>
-				                                <div class="comment-body">
-				                                    <div class="comment-heading">
-				                                        <h4 class="user">Gavino Free</h4>
-
-				                                    </div>
-				                                    <p>Ok, cool.</p>
-				                                </div>
-				                            </li>
-				                        </ul>
-				                    </li>
-	                        </ul>
-
-                      </div>
-                    <div class="clearfix"></div>
-                </div>
+    <!-- sidebar -->
+    <div class="am-u-md-3 am-u-sm-12 blog-sidebar">
+        <div class="blog-clear-margin blog-sidebar-widget blog-bor am-g ">
+            <h2 class="blog-title"><span>TAG cloud</span></h2>
+            <div class="am-u-sm-12 blog-clear-padding">
+            <a href="" class="blog-tag">cute</a>
+            <a href="" class="blog-tag">baby</a>
+            <a href="" class="blog-tag">tag</a>
+            <a href="" class="blog-tag">laugh</a>
+            <a href="" class="blog-tag">baby and cat</a>
             </div>
         </div>
-
-
+        <br>
+        <div class="blog-sidebar-widget blog-bor">
+            <h2 class="blog-title"><span>Favor</span></h2>
+                <ul class="am-list">
+                    <li><a href="#">Cat image1</a></li>
+                    <li><a href="#">Cat image2</a></li>
+                    <li><a href="#">Cat video1</a></li>
+                    <li><a href="#">Cat video2</a></li>
+                </ul>
+        </div>
     </div>
+    <!-- end sidebar -->
+
+    <!-- post start -->
+    {% from 'post.html' import postblock%}
+    {% for p in posts%}
+    <div>
+        {{ postblock(p) }}
+    </div>
+    {%endfor%}
+    <!-- end post -->
+
 </div>
+
+{% endblock %}

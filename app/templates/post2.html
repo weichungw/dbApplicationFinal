@@ -1,0 +1,53 @@
+{% macro post(pic_source="pics/cutcat1.jpg" , av_source="pics/av1.jpg", username ="anthony",
+ time="2017/11/11", text='My cat eat my homework!') %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="[ panel panel-default ] panel-google-plus">
+                <div class="panel-heading">
+                    <!-- TODO avtar -->
+                    <img class="img-circle pull-left" src="{{ url_for('static',filename='av_source') }}" alt="Mouse0270" />
+                    <!-- TODO username -->
+                    <h3>{{ username }}</h3>
+                    <h5><span>Shared publicly</span> - <span>{{ time }}</span> </h5>
+                </div>
+                <div class="panel-body">
+                    <p>{{ text }}</p>
+                    <img class="am-u-sm-8 pull-left" src="{{url_for('static',filename='pic_source')}}" alt="" />
+                </div>
+                <div class="panel-footer">
+					<a href="#" class="btn btn-default stat-item">
+						<i class="fa fa-thumbs-up icon"></i>2
+					</a>
+                    <div class="input-placeholder">Add a comment...</div>
+                </div>
+                <div class="panel-google-plus-comment">
+                    <img class="img-circle" src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s46" alt="User Image" />
+                    <div class="panel-google-plus-textarea">
+                        <textarea rows="4"></textarea>
+                        <button type="submit" class="[ btn btn-default disabled ]">Post comment</button>
+                        <button type="reset" class="[ btn btn-default ]">Cancel</button>
+
+						<ul class="comments-list">
+				            <li class="comment">
+				                <a class="pull-left" href="#">
+				                    <img class="img-circle" src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s46" alt="User Image" width="50" height="50";>
+				                </a>
+				                <div class="comment-body">
+				                    <div class="comment-heading">
+				                        <h6 class="user">Gavino Free</h6>
+				                    </div>
+				                    <p>Sure, oooooooooohhhhhhhhhhhh</p>
+				                </div>
+				            </li>
+	                    </ul>
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro%}
