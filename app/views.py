@@ -100,7 +100,24 @@ def pushpost():
 
 @app.route('/feed', methods=['GET'])
 def feed():
-    return render_template('feed.html')
+    if "userToken" not in session:
+        return redirect(url_for('account'))
+    username = session['username']
+    post_ids=db.child('Posts/').order_by_key().limit_to_last(6).get()
+    print(post_ids)
+    print(post_ids.val())
+    feedposts=[]
+    if post_ids:
+        for pid in post_ids.each():
+            p=pid.val()
+            if p['author']==username:
+                continue
+            p["avtar_url"] =db.child('Users/{}/avtar'.format(p['author'])).get().val()
+            feedposts.append(p)
+
+    feedposts.reverse()
+             
+    return render_template('feed.html',posts=feedposts)
         
 @app.route('/')
 @app.route('/account', methods=['GET','POST'])
@@ -177,6 +194,7 @@ def signup():
             db.child('Users').child(username).set(put_data)
             app.logger.debug('Sign up {} success... '.format(username))
             return redirect('home')
+
     for e in sform.errors:
         print(e)
 
