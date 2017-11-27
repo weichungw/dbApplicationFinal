@@ -206,6 +206,13 @@ def logout():
     session.pop('userToken',None)
     return redirect('account')
 
+@app.route('/newpost', methods=['GET'])
+def newpost():
+    return render_template('Postimg.html')
+
+@app.route('/video', methods=['GET'])
+def vedio():
+    return render_template('video.html')
 
 #@lm.user_loader
 #def load_user(id):

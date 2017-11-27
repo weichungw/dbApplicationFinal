@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-      <title>postimg</title>
-      <meta charset="utf-8">
-      <link rel="stylesheet" type="text/css" href="assets/css/postimg.css">
-      <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-      <script type="text/javascript" src="assets/js/post.js"></script>
-  </head>
+<head>
+    <title>postimg</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='posting.css') }}">
+    <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="{{ url_for('static', filename='post.js') }}"></script>
+</head>
 <body>
     <div id="list">
         <div class="box clearfix">
             <a class="close" href="javascript:;">×</a>
-            <img class="head" src="images/1.jpg" alt="">
+            <img class="head" src="{{ url_for( 'static',filename='pics/av1.jpg' ) }}" alt="">
             <div class="content">
                 <div class="main">
                     <p class="txt">
                         <span class="user">Andy：</span>Funny baby cat drinking milk again
                     </p>
-                    <img class="pic" src="images/img1.jpg" alt="">
+                    <!-- pic file-->
+                    <img class="pic" src="{{ url_for( 'static', filename='pics/cutcat1.jpg' ) }}" alt="">
                 </div>
                 <div class="info clearfix">
+                    <!--pic file-->
                     <span class="time">02-14 23:01</span>
                     <a class="praise" href="javascript:;">Likes</a>
 
                 </div>
                 <div class="praises-total" total="4" style="display: block;">4 people likes it</div>
+
                 <div class="comment-list">
                     <div class="comment-box clearfix" user="self">
-                        <img class="myhead" src="images/my.jpg" alt="">
+                        <!-- avtar file-->
+                        <img class="myhead" src="{{ url_for( 'static',filename='pics/av2.jpg' ) }}" alt="">
                         <div class="comment-content">
                             <p class="comment-text"><span class="user">Me：</span>Awosome</p>
                             <p class="comment-time">
@@ -49,13 +53,13 @@
 
         <div class="box clearfix">
             <a class="close" href="javascript:;">×</a>
-            <img class="head" src="images/2.jpg" alt="">
+            <img class="head" src="{{ url_for( 'static',filename='pics/av1.jpg' ) }}" alt="">
             <div class="content">
                 <div class="main">
                     <p class="txt">
                         <span class="user">Momo：</span>cat2
                     </p>
-                    <img class="pic" src="images/img5.jpg" alt="">
+                    <img class="pic" src="{{ url_for( 'static', filename='pics/cutcat2.jpg' ) }}" alt="">
                 </div>
                 <div class="info clearfix">
                     <span class="time">02-14 23:01</span>
@@ -65,7 +69,7 @@
                 <div class="praises-total" total="0" style="display: none;"></div>
                 <div class="comment-list">
                     <div class="comment-box clearfix" user="other">
-                        <img class="myhead" src="images/4.jpg" alt="">
+                        <img class="myhead" src="{{ url_for( 'static',filename='pics/av3.jpg' ) }}" alt="">
                         <div class="comment-content">
                             <p class="comment-text"><span class="user">Coco：</span>I like it.</p>
                             <p class="comment-time">
