@@ -9,7 +9,7 @@ from app import app, fbapp, auth, db, storage
 
 from datetime import datetime
 from .user import User
-from .forms import LoginForm, SignUpForm, PostPushForm 
+from .forms import LoginForm, SignUpForm, PostPushForm
 
 @app.route('/index')
 def index():
@@ -114,11 +114,11 @@ def feed():
                 continue
             p["avtar_url"] =db.child('Users/{}/avtar'.format(p['author'])).get().val()
             feedposts.append(p)
+    if len(feedposts):
+        feedposts.reverse()
 
-    feedposts.reverse()
-             
     return render_template('feed.html',posts=feedposts)
-        
+
 @app.route('/')
 @app.route('/account', methods=['GET','POST'])
 def account():
@@ -225,4 +225,4 @@ def logout():
 #    user.is_authenticated = request.form['password'] == u.password
 #    return user
 
-        
+
