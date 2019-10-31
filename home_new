@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block head%}
+<title>homepage</title>
+{% endblock %}
+
+{% block main%}
+<div class="container">
+    <div class="am-u-md-3 am-u-sm-12 blog-sidebar">
+        <div class="blog-clear-margin blog-sidebar-widget blog-bor am-g ">
+            <h2 class="blog-title"><span>TAG cloud</span></h2>
+            <div class="am-u-sm-12 blog-clear-padding">
+            <a href="" class="blog-tag">cute</a>
+            <a href="" class="blog-tag">baby</a>
+            <a href="" class="blog-tag">tag</a>
+            <a href="" class="blog-tag">laugh</a>
+            <a href="" class="blog-tag">baby and cat</a>
+            </div>
+        </div>
+        <br>
+        <div class="blog-sidebar-widget blog-bor">
+            <h2 class="blog-title"><span>Favor</span></h2>
+                <ul class="am-list">
+                    <li><a href="#">Cat image1</a></li>
+                    <li><a href="#">Cat image2</a></li>
+                    <li><a href="#">Cat video1</a></li>
+                    <li><a href="#">Cat video2</a></li>
+                </ul>
+        </div>
+    </div>
+
+    <!-- status post start -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="widget-area no-padding blank">
+                <div class="status-upload">
+                    <form action="{{ url_for('pushpost') }}" method="POST" name="pform", enctype="multipart/form-data">
+                        {{ pform.hidden_tag() }}
+                        <!--textarea placeholder="describe your day..." name="context"></textarea-->
+                        {{ pform.context(placeholder="descrive your day...") }}
+                        <ul>
+                            <!--li><a title="" data-toggle="tooltip" data-placement="top" data-original-title="Video">Image</a></li-->
+                            {{ pform.photo }}
+                        </ul>
+                        <button type="submit" class="btn btn-default"> post</button>
+                    </form>
+                </div><!-- Status Upload  -->
+		<br>
+            </div><!-- Widget Area -->
+        </div>
+
+		<!-- start print posts -->
+	    {% from 'post.html' import postblock%}
+	    {% for p in posts%}
+		{{ postblock(p) }}
+	    {%endfor%}
+		<!-- end print posts -->
+
+    </div>
+    <!-- end status post -->
+
+
+
+</div>
+{% endblock %}
